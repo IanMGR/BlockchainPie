@@ -6,8 +6,7 @@ from flask import render_template, redirect, request
 
 from app import app
 
-# The node with which our application interacts, there can be multiple
-# such nodes as well.
+# Nó onde a aplicação está conectada.
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 posts = []
@@ -15,8 +14,8 @@ posts = []
 
 def fetch_posts():
     """
-    Function to fetch the chain from a blockchain node, parse the
-    data and store it locally.
+    Função que recupera a cadeia de blocos de um nó e 
+    guarda os dados de maneira local.
     """
     get_chain_address = "{}/chain".format(CONNECTED_NODE_ADDRESS)
     response = requests.get(get_chain_address)
@@ -47,7 +46,7 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
     """
-    Endpoint to create a new transaction via our application.
+    Endpoint que cria nvoas transações a partir da aplicação.
     """
     post_content = request.form["content"]
     author = request.form["author"]
@@ -57,7 +56,7 @@ def submit_textarea():
         'content': post_content,
     }
 
-    # Submit a transaction
+    # Envia uma transação
     new_tx_address = "{}/new_transaction".format(CONNECTED_NODE_ADDRESS)
 
     requests.post(new_tx_address,

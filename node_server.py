@@ -276,8 +276,8 @@ def get_pending_tx():
 
 def consensus():
     """
-    Our naive consnsus algorithm. If a longer valid chain is
-    found, our chain is replaced with it.
+    Função que atualiza a cadeia presente 
+    caso uma cadeia maior válida for achada.
     """
     global blockchain
 
@@ -301,9 +301,7 @@ def consensus():
 
 def announce_new_block(block):
     """
-    A function to announce to the network once a block has been mined.
-    Other blocks can simply verify the proof of work and add it to their
-    respective chains.
+    Funçaõ que anuncia pra rede que um novo bloco foi mineirado.
     """
     for peer in peers:
         url = "{}add_block".format(peer)
@@ -311,6 +309,3 @@ def announce_new_block(block):
         requests.post(url,
                       data=json.dumps(block.__dict__, sort_keys=True),
                       headers=headers)
-
-# Uncomment this line if you want to specify the port number in the code
-# app.run(debug=True, port=8000)
